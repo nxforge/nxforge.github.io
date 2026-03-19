@@ -1,0 +1,245 @@
+:root {
+    --bg-color: #101010;
+    --text-color: #fff;
+
+    --card-bg: #1f1f1f;
+    --card-border: #2f2f2f;
+    --card-border-hover: #4f4f4f;
+
+    --card-bg2: #2f2f2f;
+    --card-border2: #3f3f3f;
+    --card-border-hover2: #5f5f5f;
+}
+
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: none;
+    }
+}
+
+@media (min-width: 1351px) {
+    main {
+        grid-template-columns: auto auto auto;
+    }
+}
+
+@media (max-width: 1350px) and (min-width: 769px) {
+    main {
+        grid-template-columns: auto auto;
+    }
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    touch-action: pan-x pan-y;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: sans-serif;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* Style */
+
+a {
+    padding-top: 2px;
+    color: var(--text-color);
+    text-decoration: none;
+}
+
+.theme_icon {
+    filter: invert(100%);
+}
+
+button {
+    position: relative;
+    padding: 6px 20px 6px 20px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid var(--card-border2);
+    background-color: var(--card-bg2);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: 0.3s;
+    overflow: hidden;
+}
+
+button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    background-color: #fff;
+    aspect-ratio: 1 / 1;
+    width: 200%;
+    border-radius: 100%;
+    opacity: 50%;
+    transform: translate(-50%, -50%) scale(0);
+}
+
+button:hover {
+    border-color: var(--card-border-hover2);
+}
+
+button:focus:not(:active)::after {
+    animation: ClickButton 0.4s linear;
+}
+
+/* Header */
+
+header {
+    height: 58px;
+    background-color: var(--card-bg);
+    display: grid;
+    grid-template-columns: 50% 50%;
+    align-items: center;
+    padding: 0px 24px 0px 24px;
+    width: 100vw;
+    border-bottom: 1px solid var(--card-border);
+    animation: ShowHeader 0.3s 1 ease-in-out;
+}
+
+header .name {
+    font-size: 20px;
+}
+
+header .links {
+    display: flex;
+    justify-content: end;
+}
+
+
+/* Main */
+
+main {
+    display: grid;
+    padding: 20px;
+    gap: 10px;
+}
+
+.card {
+    position: relative;
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 20px;
+    border-radius: 8px;
+    transition: 0.3s;
+    transform: translateY(0px);
+    border-color: var(--card-border);
+    animation: ShowCard 0.3s 1 ease-in-out forwards;
+    z-index: 1;
+}
+
+.card .incard {
+    display: grid;
+    grid-template-columns: 64px auto;
+    gap: 10px;
+}
+
+.card .buttons {
+    display: flex;
+    padding-top: 0px;
+    height: 0px;
+    opacity: 0;
+    transition: 0.3s;
+    pointer-events: none;
+    align-items: center;
+    justify-content: end;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--card-border-hover);
+}
+
+.card:hover .buttons {
+    margin-top: 10px;
+    height: 29px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.card img {
+    width: 64px;
+    user-select: none;
+}
+
+.card .about {
+    display: grid;
+    gap: 5px;
+}
+
+.about .name {
+    font-size: 20px;
+}
+
+/* Footer */
+
+footer {
+    position: fixed;
+    text-align: center;
+    bottom: 0px;
+    width: 100vw;
+    padding-bottom: 20px;
+    color: #aaa;
+    animation: ShowFooter 0.3s 1 ease-in-out;
+}
+
+/* Animations */
+
+@keyframes ShowCard {
+    from {
+        opacity: 0;
+        scale: 0.95;
+    }
+    to {
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+@keyframes ShowHeader {
+    from {
+        transform: translate(0%, -100%);
+    }
+
+    to {
+        transform: translate(0%, 0%);
+    }
+}
+
+@keyframes ShowFooter {
+    from {
+        transform: translate(0%, 100%);
+    }
+
+    to {
+        transform: translate(0%, 0%);
+    }
+}
+
+@keyframes ClickButton {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+    50% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+
+    to {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0;
+    }
+}
